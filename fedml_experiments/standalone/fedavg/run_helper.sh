@@ -6,9 +6,10 @@ python ./main_fedavg.py \
 --partition_method hetero  \
 --client_num_in_total 10 \
 --client_num_per_round 10 \
---comm_round 1000 \
+--comm_round 5 \
 --epochs 1 \
 --batch_size 20 \
 --client_optimizer sgd \
 --lr 0.03 \
---ci 0
+--ci 0 \
+--output_dir ./output

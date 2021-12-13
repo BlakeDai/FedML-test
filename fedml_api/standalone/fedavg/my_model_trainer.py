@@ -1,5 +1,6 @@
 import torch
 from torch import nn
+import os
 
 try:
     from fedml_core.trainer.model_trainer import ModelTrainer
@@ -13,6 +14,9 @@ class MyModelTrainer(ModelTrainer):
 
     def set_model_params(self, model_parameters):
         self.model.load_state_dict(model_parameters)
+        
+    def save_model(self, output_dir):
+        torch.save(self.model, os.path.join(output_dir, "best_model.pth"))
 
     def train(self, train_data, device, args):
         model = self.model

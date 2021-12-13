@@ -88,6 +88,9 @@ def add_args(parser):
 
     parser.add_argument('--ci', type=int, default=0,
                         help='CI')
+    
+    parser.add_argument('--output_dir', type=str,
+                        help='the path of output folder to save model pth')
     return parser
 
 
@@ -291,6 +294,8 @@ if __name__ == "__main__":
         name="FedAVG-r" + str(args.comm_round) + "-e" + str(args.epochs) + "-lr" + str(args.lr),
         config=args
     )
+    
+    os.makedirs(args.output_dir, exist_ok=True)
 
     # Set the random seed. The np.random seed determines the dataset partition.
     # The torch_manual_seed determines the initial weight.
@@ -313,3 +318,4 @@ if __name__ == "__main__":
 
     fedavgAPI = FedAvgAPI(dataset, device, args, model_trainer)
     fedavgAPI.train()
+    fedavgAPI.save_model(args.output_dir)

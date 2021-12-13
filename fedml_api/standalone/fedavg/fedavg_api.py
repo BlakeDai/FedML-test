@@ -79,6 +79,10 @@ class FedAvgAPI(object):
                     self._local_test_on_validation_set(round_idx)
                 else:
                     self._local_test_on_all_clients(round_idx)
+                    
+    def save_model(self, output_dir):
+        self.model_trainer.save_model(output_dir)
+        return  
 
     def _client_sampling(self, round_idx, client_num_in_total, client_num_per_round):
         if client_num_in_total == client_num_per_round:
